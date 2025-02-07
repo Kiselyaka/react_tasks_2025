@@ -1,13 +1,17 @@
 import React from 'react';
 
-function App()
-{
-	function getDigitsSum(sum){
-		return String(sum).split('').reduce((acc, digit) => acc + +digit, 0);
+function App() {
+	function show1() {
+		alert(1);
+	}
+	
+	function show2() {
+		alert(2);
 	}
 	
 	return <div>
-		сумма цифр переданного числа 12345: {getDigitsSum(12345)}
+		<button onClick={show1}>act1</button> <br />
+		<button onClick={show2}>act2</button>
 	</div>;
 }
 
