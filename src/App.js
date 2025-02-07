@@ -1,17 +1,15 @@
 import React from 'react';
 
 function App() {
-	const arr = [1, 2, 3, 4, 5];
+	const obj = {name: 'john', surname: 'smit'};
 	
-	return <div>
-		<ul>
-			<li>{arr[0]}</li>
-			<li>{arr[1]}</li>
-			<li>{arr[2]}</li>
-			<li>{arr[3]}</li>
-			<li>{arr[4]}</li>
-		</ul>	
-	</div>;
+	return (<div>
+	<p>
+	name:    <span>{obj.name}</span> <br />
+	surname: <span>{obj.surname}</span>
+    </p>
+	</div>
+);
 }
 
 export default App;
