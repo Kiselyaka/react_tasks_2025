@@ -7,18 +7,26 @@ function App() {
 		{id: 3, name: 'user3', surn: 'surn3', age: 32},
 	];
 
-	const res = users.map(function(item) {
-		return <p key={item.id}>
-			<li>Имя пользователя: {item.name}, фамилия пользователя: {item.surn}, возраст пользователя: {item.age}</li>
-		</p>;
+	const rows = users.map(function(item) {
+		return <tr key={item.id}>
+			<td>{item.name}</td>
+			<td>{item.surn}</td>
+			<td>{item.age}</td>
+		</tr>;
 	});
-	// совесть не мучает?)
-	return <div>
-		<ul>
-		{res}
-		</ul>
-	</div>;
-
+	
+	return <table>
+		<thead>
+			<tr>
+				<td> имя </td>
+				<td> фамилия </td>
+				<td> возраст </td>
+			</tr>
+		</thead>
+		<tbody>
+			{rows}
+		</tbody>
+	</table>;
 }
 
 export default App;
