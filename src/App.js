@@ -2,18 +2,13 @@ import React from 'react';
 
 function App() {
 	let text;
-	const isAdult = true;
+	const isAdmin = true;
 	
-	if (isAdult) {
-		text = <p>text true</p>;
-	}
-	else{
-		text = <p>text false</p>
-	}
+	if (isAdmin) {
+		text = <p>пользователь является администратором</p>;
+	} 
 	
-	return <div>
-		{text}
-	</div>;
+	return text;
 }
 
 export default App;
