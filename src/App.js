@@ -5,9 +5,9 @@ function App()
 	function getDigitsSum(sum){
 		return String(sum).split('').reduce((acc, digit) => acc + +digit, 0);
 	}
-	const sum = getDigitsSum(123)
+	
 	return <div>
-		сумма цифр переданного числа 123: {sum}
+		сумма цифр переданного числа 12345: {getDigitsSum(12345)}
 	</div>;
 }
 
