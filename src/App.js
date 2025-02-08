@@ -4,20 +4,19 @@ import { useState } from 'react';
 
 // import { v4 as uuidv4 } from 'react-uuid'; // Для второго варианта
 
-function App() 
-{
-	const [name_user, setName1] = useState('Maxim');
-	const [name_last, setName2] = useState('Kiseliov');
-	const changeName = () => {
-		setName1('Новое имя'); // Вы можете изменить на нужное вам значение
-	  };
-  return (
-    <div>
-      Имя пользователя: {name_user} {name_last}<br />
-	  <button onClick={changeName}>Изменить имя</button>
-	  <button onClick={() => setName2('xxxx')}>Изменить фамилию</button>
-    </div>
-  );
+function App() {
+	const [isBanned, setIsBanned] = useState(false);
+	
+	return (
+		<div>
+			<span>{isBanned ? 'Пользователь забанен' : 'Пользователь не забанен'}</span>
+			{isBanned ? (
+				<button onClick={() => setIsBanned(false)}>Разбанить</button>
+			) : (
+				<button onClick={() => setIsBanned(true)}>Забанить</button>
+			)}
+		</div>
+	);
 }
 
 export default App;
