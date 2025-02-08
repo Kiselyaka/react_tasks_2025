@@ -5,18 +5,21 @@ import { useState } from 'react';
 // import { v4 as uuidv4 } from 'react-uuid'; // Для второго варианта
 
 function App() {
-	const [isBanned, setIsBanned] = useState(false);
+	const [count, setCount] = useState(0);
 	
-	return (
-		<div>
-			<span>{isBanned ? 'Пользователь забанен' : 'Пользователь не забанен'}</span>
-			{isBanned ? (
-				<button onClick={() => setIsBanned(false)}>Разбанить</button>
-			) : (
-				<button onClick={() => setIsBanned(true)}>Забанить</button>
-			)}
-		</div>
-	);
+	function clickLow() {
+		setCount(count - 1);
+	}
+	function clickUp() {
+		setCount(count + 1);
+	}
+	
+	
+	return <div>
+		<span>{count}</span>
+		<button onClick={clickUp}>увеличить значение</button>
+		<button onClick={clickLow}>уменьшить значение</button>
+	</div>;
 }
 
 export default App;
