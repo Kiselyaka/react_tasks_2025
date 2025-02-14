@@ -1,86 +1,54 @@
 import React, { useState } from 'react';
 
+function translit(text) {
+  const translitMap = {
+    'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 
+    'ё': 'yo', 'ж': 'zh', 'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 
+    'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 
+    'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'kh', 
+    'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 
+    'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 
+    'ю': 'yu', 'я': 'ya',
+  };
+
+  // или через цикл и кейсы => прибавлять символы к строке, но мне лень
+
+  return text.split('').map(char => translitMap[char] || char).join('');
+}
+
 function App() {
+  const [value, setValue] = useState('');
 
-  const [value1, setValue1] = useState(0);
-  const [value2, setValue2] = useState(0);
-  const [sumResult, setSumResult] = useState(0);
-  const [productResult, setProductResult] = useState(0);
+  function handleChange(event) {
+    setValue(event.target.value);
+  }
 
-  const today = new Date().toISOString().split('T')[0];
-  const [date1, setDate1] = useState(today);
-  const [date2, setDate2] = useState(today);
-  const [dateDiffResult, setDateDiffResult] = useState(0);
+  const [value2, setValue2] = useState('');
 
-  const [number, setNumber] = useState('');
-  const [digitSumResult, setDigitSumResult] = useState(0);
+  function handleChange2(event) {
+    setValue2(event.target.value);
+  }
 
-  const [divisorNumber, setDivisorNumber] = useState('');
-  const [divisorProductResult, setDivisorProductResult] = useState(1);
-
-  const handleSum = () => {
-    setSumResult(Number(value1) + Number(value2));
-  };
-
-  const handleProduct = () => {
-    setProductResult(Number(value1) * Number(value2));
-  };
-
-  const handleCalculateDifference = () => {
-    const diffTime = Math.abs(new Date(date2) - new Date(date1));
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    setDateDiffResult(diffDays);
-  };
-
-  const handleDigitSumBlur = () => {
-    const sum = Array.from(number).reduce((acc, digit) => acc + Number(digit), 0);
-    setDigitSumResult(sum);
-  };
-
-  const handleDivisorProductBlur = () => {
-    let product = 1;
-    for (let i = 1; i <= divisorNumber; i++) {
-      if (divisorNumber % i === 0) {
-        product *= i;
-      }
-    }
-    setDivisorProductResult(product);
-  };
-
-// не копируй, хорошО?
+  const sum = value2
+  .split('\n')
+  .map(line => parseFloat(line)) 
+  .filter(num => !isNaN(num)) 
+  .reduce((acc, curr) => acc + curr, 0); 
 
   return (
     <div>
-
-      Задача 1: 
-      <h2>Сумма и произведение чисел</h2>
-      <input value={value1} onChange={event => setValue1(event.target.value)} placeholder="Введите первое число" />
-      <input value={value2} onChange={event => setValue2(event.target.value)} placeholder="Введите второе число" />
-      
-      <button onClick={handleSum}>Сумма</button>
-      <button onClick={handleProduct}>Произведение</button>
-      <p>Сумма: {sumResult}</p>
-      <p>Произведение: {productResult}</p>
-
-      Задача 2-3:
-      <h2>Разница между датами</h2>
-      <input type="date" value={date1} onChange={event => setDate1(event.target.value)} />
-      <input type="date" value={date2} onChange={event => setDate2(event.target.value)} />
-      
-      <button onClick={handleCalculateDifference}>Посчитать разницу</button>
-      <p>Разница в днях: {dateDiffResult}</p>
-
-      Задача 4: 
-      <h2>Сумма цифр числа</h2>
-      <input value={number} onChange={event => setNumber(event.target.value)} onBlur={handleDigitSumBlur} placeholder="Введите число" />
-      <p>Сумма цифр: {digitSumResult}</p>
-
-      Задача 5: 
-      <h2>Произведение делителей числа</h2>
-      <input value={divisorNumber} onChange={event => setDivisorNumber(event.target.value)} onBlur={handleDivisorProductBlur} placeholder="Введите число" />
-      <p>Произведение делителей: {divisorProductResult}</p>
+      <div> 
+      Задание 1:
+      <textarea value={value} onChange={handleChange} />
+      <p>{translit(value)}</p>
+      </div>
+      <div>
+      Задание 2:
+      <textarea value={value2} onChange={handleChange2} />
+      <p>Сумма: {sum}</p>
+      </div>
     </div>
   );
-};
+}
 
 export default App;
