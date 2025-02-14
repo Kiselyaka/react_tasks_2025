@@ -34,6 +34,7 @@ function App() {
     <div>
       {result}
       <h3>Среднее арифметическое: {getAverage(notes)}</h3>
+      <h3>Сумма элементов: {getSum(notes)}</h3>
     </div>
   );
 }
