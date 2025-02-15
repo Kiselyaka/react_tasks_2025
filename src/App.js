@@ -1,51 +1,43 @@
 import React, { useState } from 'react';
 
-const initDate = {
-  year: 2025,
-  month: 12,
-  day: 31,
-};
-
-const daysOfWeek = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
-
 function App() {
-  const [date, setDate] = useState(initDate);
+	const [notes, setNotes] = useState([1, 2, 3, 4, 5]);
+  const [inputValue, setInputValue] = useState('');
+	
+  const addNote = () => {
+    setNotes([...notes, notes.length + 1]);
+  };
 
-  function handleChange(prop, event) {
-    setDate({ ...date, [prop]: event.target.value });
-  }
+  const addNote2 = () => {
+    if (inputValue.trim() !== '') { 
+      setNotes([...notes, inputValue]); 
+      setInputValue(''); 
+    }
+  };
 
-  const currentDate = new Date(date.year, date.month - 1, date.day);
-  const dayOfWeekIndex = currentDate.getDay(); 
-  const dayOfWeek = daysOfWeek[dayOfWeekIndex]; 
-
-  return (
+	const result = notes.map((note, index) => {
+		return <li key={index}>{note}</li>;
+	});
+	
+	return <div>
     <div>
-      <input 
-        type="number" 
-        value={date.year} 
-        onChange={event => handleChange('year', event)} 
-        placeholder="Год" 
-      />
-      <input 
-        type="number" 
-        value={date.month} 
-        onChange={event => handleChange('month', event)} 
-        placeholder="Месяц" 
-      />
-      <input 
-        type="number" 
-        value={date.day} 
-        onChange={event => handleChange('day', event)} 
-        placeholder="День" 
-      />
-
-      <br />
-      <p>
-        {date.year}-{date.month}-{date.day} ({dayOfWeek})
-      </p>
+      Задача 1:
+		<ul>
+			{result}
+		</ul>
+    <button onClick={addNote}>Добавить элемент</button>
     </div>
-  );
+    <div>
+      Задача 2: <br />
+      <input 
+          type="text" 
+          value={inputValue} 
+          onChange={(e) => setInputValue(e.target.value)} 
+          placeholder="Введите текст" 
+        />
+        <button onClick={addNote2}>Добавить заметку</button> 
+    </div>
+	</div>;
 }
 
 export default App;
