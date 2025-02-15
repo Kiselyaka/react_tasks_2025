@@ -1,40 +1,49 @@
 import React, { useState } from 'react';
 
-function getSum(arr) {
-  let sum = 0;  
-  for (const elem of arr) {
-    sum += +elem; 
-  }
-  return sum;
-}
+const initDate = {
+  year: 2025,
+  month: 12,
+  day: 31,
+};
 
-function getAverage(arr) {
-  if (arr.length === 0) return 0; 
-  return getSum(arr) / arr.length; 
-}
+const daysOfWeek = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
 function App() {
-  const [notes, setNotes] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
-  
-  function changeHandler(index, event) {
-    setNotes([...notes.slice(0, index), event.target.value, ...notes.slice(index + 1)]);
+  const [date, setDate] = useState(initDate);
+
+  function handleChange(prop, event) {
+    setDate({ ...date, [prop]: event.target.value });
   }
-  
-  const result = notes.map((note, index) => {
-    return (
-      <input
-        key={index}
-        value={note}
-        onChange={event => changeHandler(index, event)}
-      />
-    );
-  });
-  
+
+  const currentDate = new Date(date.year, date.month - 1, date.day);
+  const dayOfWeekIndex = currentDate.getDay(); 
+  const dayOfWeek = daysOfWeek[dayOfWeekIndex]; 
+
   return (
     <div>
-      {result}
-      <h3>Среднее арифметическое: {getAverage(notes)}</h3>
-      <h3>Сумма элементов: {getSum(notes)}</h3>
+      <input 
+        type="number" 
+        value={date.year} 
+        onChange={event => handleChange('year', event)} 
+        placeholder="Год" 
+      />
+      <input 
+        type="number" 
+        value={date.month} 
+        onChange={event => handleChange('month', event)} 
+        placeholder="Месяц" 
+      />
+      <input 
+        type="number" 
+        value={date.day} 
+        onChange={event => handleChange('day', event)} 
+        placeholder="День" 
+      />
+
+      <br />
+      <p>
+        {date.year}-{date.month}-{date.day} ({dayOfWeek})
+      </p>
     </div>
   );
 }
