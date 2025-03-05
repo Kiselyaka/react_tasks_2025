@@ -19,9 +19,14 @@ function App() {
                     </tr>
                 </thead>
                 <tbody>
-                    <User name={users[0].name} surn={users[0].surn} age={users[0].age} />
-                    <User name={users[1].name} surn={users[1].surn} age={users[1].age} />
-                    <User name={users[2].name} surn={users[2].surn} age={users[2].age} />
+                    {users.map(user => (
+                        <User 
+                            key={user.id} // Добавляем уникальный ключ для каждого компонента
+                            name={user.name} 
+                            surn={user.surn} 
+                            age={user.age} 
+                        />
+                    ))}
                 </tbody>
             </table>
         </div>
