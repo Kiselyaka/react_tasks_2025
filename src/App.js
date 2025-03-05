@@ -1,22 +1,31 @@
 import React from 'react';
-import Employee from './Employee'; // Импортируем компонент Employee
-import Product from './Product'; 
+import User from './User'; // Импортируем компонент User
+
+const users = [
+    { id: 1, name: 'user1', surn: 'surn1', age: 30 },
+    { id: 2, name: 'user2', surn: 'surn2', age: 31 },
+    { id: 3, name: 'user3', surn: 'surn3', age: 32 },
+];
 
 function App() {
-	const name1  = 'product1';
-	const cost1 = '100';
-	
-	const name2  = 'product2';
-	const cost2 = '100';
-	
-	const name3  = 'product3';
-	const cost3 = '100';
-	
-	return <div>
-		<Product name={name1} cost={cost1} />
-		<Product name={name2} cost={cost2} />
-		<Product name={name3} cost={cost3} />
-	</div>;
+    return (
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Имя</th>
+                        <th>Фамилия</th>
+                        <th>Возраст</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <User name={users[0].name} surn={users[0].surn} age={users[0].age} />
+                    <User name={users[1].name} surn={users[1].surn} age={users[1].age} />
+                    <User name={users[2].name} surn={users[2].surn} age={users[2].age} />
+                </tbody>
+            </table>
+        </div>
+    );
 }
 
 export default App;

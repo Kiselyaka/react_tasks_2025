@@ -1,11 +1,12 @@
 import React from 'react';
 
-function User() {
-    const users = {id: 1, name: 'makson', fname: 'kiselyakas'}
+function User({ name, surn, age }) {
     return (
-        <p>
-            User: {users.fname} {users.name}
-        </p>
+        <tr>
+            <td>{name}</td>
+            <td>{surn}</td>
+            <td>{age}</td>
+        </tr>
     );
 }
 
