@@ -1,13 +1,14 @@
 import React from 'react';
-import Product from './Product'; // импортируем продукт
-import User from './User'; // импортируем продукт
+import Employee from './Employee'; // Импортируем компонент Employee
+
 function App() {
-	return <div>
-		<Product />
-    <User />
-    <User/>
-    <User/>
-	</div>;
+    return (
+        <div>
+            <Employee lastName="Джепаров" firstName="Энвер" middleName="Исметович" salary="80000" />
+            <Employee lastName="Данилюк" firstName="Дмитрий" middleName="Витальевич" salary="90000" />
+            <Employee lastName="Иванов" firstName="Иван" middleName="Иванович" salary="100000" />
+        </div>
+    );
 }
 
 export default App;
