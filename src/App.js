@@ -1,45 +1,46 @@
 import React, { useState } from 'react';
 
 const initNotes = [
-  {
-    id: 'GYi9G_uC4gBF1e2SixDvu',
-    prop1: 'value11',
-    prop2: 'value12',
-    prop3: 'value13',
-  },
-  {
-    id: 'IWSpfBPSV3SXgRF87uO74',
-    prop1: 'value21',
-    prop2: 'value22',
-    prop3: 'value23',
-  },
-  {
-    id: 'JAmjRlfQT8rLTm5tG2m1L',
-    prop1: 'value31',
-    prop2: 'value32',
-    prop3: 'value33',
-  },
+  { id: 1, prop1: 'Note 1', prop2: 'Details 1', prop3: 'Extra 1' },
+  { id: 2, prop1: 'Note 2', prop2: 'Details 2', prop3: 'Extra 2' },
 ];
 
 function App() {
   const [notes, setNotes] = useState(initNotes);
-  const [newProp1, setNewProp1] = useState('');
-  const [newProp2, setNewProp2] = useState('');
-  const [newProp3, setNewProp3] = useState('');
+  const [selectedNote, setSelectedNote] = useState({});
 
-  const addNote = () => {
-    const newNote = {
-      id: Date.now().toString(), 
-      prop1: newProp1,
-      prop2: newProp2,
-      prop3: newProp3,
-    };
-    
-    setNotes([...notes, newNote]); 
-    setNewProp1('');
-    setNewProp2('');
-    setNewProp3('');
-  };
+  // Задание 1: Функция для изменения заметки
+  function doSmth(id) {
+    setNotes(notes.map(note => {
+      if (note.id === id) {
+        note.prop1 += '!';
+        note.prop2 += '!';
+        note.prop3 += '!';
+      }
+      return note;
+    }));
+  }
+
+  // Задание 1: Функция для удаления заметки
+  function deleteNote(id) {
+    setNotes(notes.filter(note => note.id !== id));
+  }
+
+  // Задание 2: Функция для заполнения инпутов данными заметки
+  function fillInputs(note) {
+    setSelectedNote(note);
+  }
+
+  // Задание 3: Функция для сохранения изменений в заметке
+  function saveChanges() {
+    setNotes(notes.map(note => {
+      if (note.id === selectedNote.id) {
+        return selectedNote;
+      }
+      return note;
+    }));
+    setSelectedNote({});
+  }
 
   const result = notes.map(note => {
     return (
@@ -47,6 +48,10 @@ function App() {
         <span>{note.prop1}</span>
         <span>{note.prop2}</span>
         <span>{note.prop3}</span>
+        
+        <button onClick={() => doSmth(note.id)}>Кнопочка</button>
+        <button onClick={() => deleteNote(note.id)}>Удалить</button>
+        <button onClick={() => fillInputs(note)}>Изменения</button>
       </li>
     );
   });
@@ -56,25 +61,27 @@ function App() {
       <ul>
         {result}
       </ul>
-      <input 
-        type="text" 
-        value={newProp1} 
-        onChange={(e) => setNewProp1(e.target.value)} 
-        placeholder="Введите prop1" 
-      />
-      <input 
-        type="text" 
-        value={newProp2} 
-        onChange={(e) => setNewProp2(e.target.value)} 
-        placeholder="Введите prop2" 
-      />
-      <input 
-        type="text" 
-        value={newProp3} 
-        onChange={(e) => setNewProp3(e.target.value)} 
-        placeholder="Введите prop3" 
-      />
-      <button onClick={addNote}>Добавить элемент</button>
+      <div>
+        <input
+          type="text"
+          value={selectedNote.prop1 || ''}
+          onChange={e => setSelectedNote({ ...selectedNote, prop1: e.target.value })}
+          placeholder="Prop1"
+        />
+        <input
+          type="text"
+          value={selectedNote.prop2 || ''}
+          onChange={e => setSelectedNote({ ...selectedNote, prop2: e.target.value })}
+          placeholder="Prop2"
+        />
+        <input
+          type="text"
+          value={selectedNote.prop3 || ''}
+          onChange={e => setSelectedNote({ ...selectedNote, prop3: e.target.value })}
+          placeholder="Prop3"
+        />
+        <button onClick={saveChanges}>Сохранить изменения</button>
+      </div>
     </div>
   );
 }
