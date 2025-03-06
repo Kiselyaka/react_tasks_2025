@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import User from './User';
 
 const Users = () => {
-    const users = [
-        { id: 1, name: 'Bim Bim', email: 'BimBim@example.com' },
-        { id: 2, name: 'Bam Bam', email: 'BamBam@example.com' },
-        { id: 3, name: 'Bom Bom', email: 'BomBom@example.com' },
-    ];
+    const [users, setUsers] = useState([
+        { id: 1, name: 'John Doe', email: 'john@example.com' },
+        { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
+        { id: 3, name: 'Alice Johnson', email: 'alice@example.com' },
+    ]);
+
+    const banUser = (id) => {
+        setUsers(prevUsers => prevUsers.filter(user => user.id !== id));
+        console.log('Пользователь с ID ',id ,' забанен');
+    };
 
     return (
         <div>
             {users.map(user => (
-                <User key={user.id} user={user} />
+                <User key={user.id} user={user} onBan={banUser} /> 
             ))}
         </div>
     );
