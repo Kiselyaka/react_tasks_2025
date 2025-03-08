@@ -1,31 +1,37 @@
 import React, { useState } from 'react';
 import User from './User';
 
-const Users = () => {
-    const [users, setUsers] = useState([
-        { id: 1, name: 'John Doe', email: 'john@example.com' },
-        { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
-        { id: 3, name: 'Alice Johnson', email: 'alice@example.com' },
-    ]);
+function Users({ initUsers }) { // Добавляем пропс initUsers
+  const [users, setUsers] = useState(initUsers); // Используем его для инициализации состояния
 
-    const banUser = (id) => {
-        setUsers(prevUsers => prevUsers.filter(user => user.id !== id));
-        console.log('Пользователь с ID ', id, ' забанен');
-    };
+  function changeField(id, field, event) {
+    setUsers(users.map(user => {
+      if (user.id === id) {
+        user[field] = event.target.value;
+      }
+      return user;
+    }));
+  }
 
-    const editUser = (id, updatedUser) => {
-        setUsers(prevUsers => prevUsers.map(user => 
-            user.id === id ? { ...user, ...updatedUser } : user
-        ));
-    };
+  const rows = users.map(user => (
+    <User
+      key={user.id}
+      id={user.id}
+      name={user.name}
+      email={user.email}
+      changeField={changeField}
+    />
+  ));
 
-    return (
-        <div>
-            {users.map(user => (
-                <User key={user.id} user={user} onBan={banUser} onEdit={editUser} /> 
-            ))}
-        </div>
-    );
-};
+  return (
+    <div>
+      <table>
+        <tbody>
+          {rows}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 export default Users;
