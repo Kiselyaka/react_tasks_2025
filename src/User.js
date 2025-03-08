@@ -1,41 +1,40 @@
 import React, { useState } from 'react';
 
-const User = ({ user, onBan, onEdit }) => {
+const User = ({ user, onBan, onEdit, UserField }) => {
     const [isEditing, setIsEditing] = useState(false);
-    const [editedName, setEditedName] = useState(user.name);
-    const [editedEmail, setEditedEmail] = useState(user.email);
 
-    const handleEdit = () => {
-        onEdit(user.id, { name: editedName, email: editedEmail });
-        setIsEditing(false);
+    const toggleEditMode = () => {
+        setIsEditing(!isEditing);
+    };
+
+    const handleEdit = (id, fieldType, value) => {
+        onEdit(id, { [fieldType]: value });
     };
 
     return (
         <div>
-            {isEditing ? (
-                <div>
-                    <input 
-                        type="text" 
-                        value={editedName} 
-                        onChange={(e) => setEditedName(e.target.value)} 
-                    />
-                    <input 
-                        type="email" 
-                        value={editedEmail} 
-                        onChange={(e) => setEditedEmail(e.target.value)} 
-                    />
-                    <button onClick={handleEdit}>Сохранить</button>
-                    <button onClick={() => setIsEditing(false)}>Отмена</button>
-                </div>
-            ) : (
-                <div>
-                    <h2>{user.name}</h2>
-                    <p>ID: {user.id}</p>
-                    <p>Email: {user.email}</p>
-                    <button onClick={() => onBan(user.id)}>Забанить пользователя</button>
-                    <button onClick={() => setIsEditing(true)}>Редактировать</button>
-                </div>
-            )}
+            <div>
+                Name: <UserField
+                    id={user.id}
+                    text={user.name}
+                    type="name"
+                    isEdit={isEditing}
+                    editUser={handleEdit}
+                />
+            </div>
+            <div>
+                Email: <UserField
+                    id={user.id}
+                    text={user.email}
+                    type="email"
+                    isEdit={isEditing}
+                    editUser={handleEdit}
+                />
+            </div>
+            <button onClick={() => onBan(user.id)}>Забанить пользователя</button>
+            <button onClick={toggleEditMode}>
+                {isEditing ? 'Сохранить' : 'Редактировать'}
+            </button>
         </div>
     );
 };
