@@ -1,35 +1,13 @@
 import React, { useState } from 'react';
-import Calculator from './Calculator';
-import TemperatureConverter from './TemperatureConverter';
+import './styles.css';
 
 function App() {
-  const [notes, setNotes] = useState([1, 2, 3, 4, 5]);
-  const [editNum, setEditNum] = useState(null);
-
-  const startEdit = (index) => {
-    setEditNum(index); 
-  };
-
-  const changeItem = (event) => {
-    const newNotes = [...notes];
-    newNotes[editNum] = event.target.value;
-    setNotes(newNotes);
-  };
-
-  const result = notes.map((note, index) => (
-    <p key={index} onClick={() => startEdit(index)}>
-      {note}
-    </p>
-  ));
-
-  return (
-    <div>
-      {result}
-      {editNum !== null && ( 
-        <input value={notes[editNum]} onChange={changeItem} />
-      )}
-    </div>
-  );
+	return (
+		<div class="class1">
+	<button class="class3">button1</button>
+	<button class="class4">button2</button>
+</div>	
+	);
 }
 
 export default App;
