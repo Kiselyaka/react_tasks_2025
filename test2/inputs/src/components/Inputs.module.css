@@ -6,15 +6,18 @@
 
 .input1 {
   composes: common-input; 
+  composes: beauty from '../App.module.css'; 
   border: 2px solid blue; 
 }
 
 .input2 {
   composes: common-input; 
+  composes: beauty from '../App.module.css'; 
   border: 2px solid green; 
 }
 
 .input3 {
   composes: common-input; 
+  composes: beauty from '../App.module.css'; 
   border: 2px solid red; 
 }
