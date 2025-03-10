@@ -1,13 +1,20 @@
-.input {
-    padding: 10px;
-    margin: 10px 0;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
+.common-input {
+  font-size: 14px; 
+  border-radius: 5px; 
+  padding: 10px; 
+}
 
-  .input:focus {
-    border-color: blue;
-    outline: none;
-  }
-  
+.input1 {
+  composes: common-input; 
+  border: 2px solid blue; 
+}
+
+.input2 {
+  composes: common-input; 
+  border: 2px solid green; 
+}
+
+.input3 {
+  composes: common-input; 
+  border: 2px solid red; 
+}
