@@ -11,23 +11,32 @@ const Container = styled.div`
 const Button = styled.button`
   padding: 10px 20px;
   font-size: 16px;
-  color: white;
-  background-color: #007bff; 
+  color: ${(props) => (props.warn ? 'red' : 'white')}; 
+  background-color: ${(props) => (props.warn ? 'yellow' : '#007bff')};
   border: none;
   border-radius: 5px;
   cursor: pointer;
 
   &:disabled {
-    background-color: #cccccc;
+    background-color: #cccccc; 
     cursor: not-allowed; 
   }
+`;
+
+const Input = styled.input`
+  background: ${(props) => (props.first ? 'yellow' : 'green')};
+  margin: 5px;
+  font-size: 18px;
 `;
 
 function Block() {
   return (
     <Container>
+      <Input first />
+      <Input placeholder="name" type="text" />
+      <Input type="password" />
       <Button disabled>Кнопка 1</Button> {/* Первая кнопка заблокирована */}
-      <Button>Кнопка 2</Button>
+      <Button warn>Кнопка 2</Button> {/* Вторая кнопка с пропсом warn */}
       <Button type="reset">Кнопка 3</Button> {/* Третья кнопка с типом reset */}
     </Container>
   );
