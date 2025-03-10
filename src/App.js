@@ -1,11 +1,15 @@
 import React from 'react';
-import './App.css';
-import Checklist from './Checklist';
+import { useEffect } from 'react';
 
 function App() {
+  useEffect(() => {
+    document.title = 'Мой новый заголовок страницы';
+    document.body.style.backgroundColor = 'green';
+  }, []); 
+
   return (
-    <div className="App">
-      <Checklist />
+    <div>
+      <h1>React App</h1>
     </div>
   );
 }
