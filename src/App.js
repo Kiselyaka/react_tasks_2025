@@ -1,13 +1,13 @@
 import React from 'react';
-import { MyContext } from './MyContext.js';
+import Parent from './Parent';
+import './styles.css'; 
 
 function App() {
   return (
-    <MyContext.Provider value={{ /* Здесь можно указать данные, которые вы хотите передать */ }}>
-      <div>
-        <h1>Пример использования контекста</h1>
-      </div>
-    </MyContext.Provider>
+    <div>
+      <h1>Контекст в React</h1>
+      <Parent />
+    </div>
   );
 }
 
