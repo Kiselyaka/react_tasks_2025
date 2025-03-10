@@ -3,27 +3,24 @@ import { useEffect } from 'react';
 import { useState} from 'react';
 
 function App() {
-  const [username, setUsername] = useState(() => {
-    return localStorage.getItem('username') || '';
-  });
-  
-  useEffect(() => {
-    localStorage.setItem('username', username);
-  }, [username]); 
-  const changeUsername = (event) => {
-    setUsername(event.target.value); 
+  const [backgroundColor, setBackgroundColor] = useState('white');
+
+  const handleClick = () => {
+    const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+    setBackgroundColor(randomColor);
   };
 
+  useEffect(() => {
+    document.body.style.backgroundColor = backgroundColor;
+
+    return () => {
+      document.body.style.backgroundColor = 'white';
+    };
+  }, [backgroundColor]);
+
   return (
-    <div>
-      <h1>React App</h1>
-      <input 
-        type="text" 
-        value={username} 
-        onChange={changeUsername} 
-        placeholder="Введите имя пользователя" 
-      />
-      <p>Текущее имя пользователя: {username}</p>
+    <div onClick={handleClick} style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <h1>Кликните где угодно, чтобы изменить фон!</h1>
     </div>
   );
 }
