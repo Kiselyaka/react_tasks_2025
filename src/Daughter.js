@@ -3,11 +3,11 @@ import { MyContext } from './MyContext';
 import Grandson from './Grandson';
 
 function Daughter() {
-  const age = useContext(MyContext);
+  const { age } = useContext(MyContext);
 
   return (
     <div>
-      <p>Age in Daughter: {age}</p>
+      <p>Возраст в Daughter: {age}</p>
       <Grandson />
     </div>
   );
