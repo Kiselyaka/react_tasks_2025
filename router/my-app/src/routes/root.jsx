@@ -1,5 +1,10 @@
 function Root() {
-	return <div>Hello Router! а он опять у меня копирует!</div>;
+	return (
+		<nav>
+			<a href={`/students/1`}>Student1</a>
+			<a href={`/students/2`}>Student2</a>
+		</nav>
+	);
 }
 
 export default Root;
