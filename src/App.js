@@ -1,22 +1,22 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 const App = () => {
-  const ref = useRef(null); 
-  const [inputValue, setInputValue] = useState('');
+  const [text, setText] = useState('react');
+  const [num, setNum] = useState(0);
 
-  const handleClick = () => {
-    ref.current.focus(); 
-    setInputValue(''); 
+  const triple = (num) => {
+    let startTime = performance.now();
+    while (performance.now() - startTime < 500) {
+    }
+    
+    return num * 3;
   };
+  const result = useMemo(() => triple(num), [num]);
 
   return (
     <div>
-      <input 
-        ref={ref} 
-        value={inputValue} 
-        onChange={(e) => setInputValue(e.target.value)} 
-      />
-      <button onClick={handleClick}>Focus and Clear</button>
+      <p onClick={() => setText(text + '!')}>{text}</p>
+      <p onClick={() => setNum(num + 1)}>Triple: {result}</p>
     </div>
   );
 };
