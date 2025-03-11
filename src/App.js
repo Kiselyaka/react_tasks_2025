@@ -1,22 +1,17 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
+import Text from './Text'; 
 
 const App = () => {
-  const [text, setText] = useState('react');
-  const [num, setNum] = useState(0);
-
-  const triple = (num) => {
-    let startTime = performance.now();
-    while (performance.now() - startTime < 500) {
-    }
-    
-    return num * 3;
-  };
-  const result = useMemo(() => triple(num), [num]);
+  const [name, setName] = useState('');
 
   return (
     <div>
-      <p onClick={() => setText(text + '!')}>{text}</p>
-      <p onClick={() => setNum(num + 1)}>Triple: {result}</p>
+      <label>
+        Name:
+        <input value={name} onChange={(e) => setName(e.target.value)} />
+      </label>
+      <br />
+      <Text />
     </div>
   );
 };
