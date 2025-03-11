@@ -1,26 +1,22 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 const App = () => {
-  const [textState, setTextState] = useState('text');
+  const ref = useRef(null); 
+  const [inputValue, setInputValue] = useState('');
 
-  const handleClickState = () => {
-    setTextState(textState + '!');
-  };
-  const ref = useRef('text');
-  const handleClickRef = () => {
-    ref.current += '!';
-    console.log(ref.current); 
+  const handleClick = () => {
+    ref.current.focus(); 
+    setInputValue(''); 
   };
 
   return (
     <div>
-      <h2>Использование useState</h2>
-      <p>{textState}</p>
-      <button onClick={handleClickState}>Добавить восклицательный знак (useState)</button>
-
-      <h2>Использование useRef</h2>
-      <p>{ref.current}</p> 
-      <button onClick={handleClickRef}>Добавить восклицательный знак (useRef)</button>
+      <input 
+        ref={ref} 
+        value={inputValue} 
+        onChange={(e) => setInputValue(e.target.value)} 
+      />
+      <button onClick={handleClick}>Focus and Clear</button>
     </div>
   );
 };
