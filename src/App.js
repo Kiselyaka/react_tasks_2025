@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
-import Parent from './Parent';
-import { MyContext } from './MyContext';
-import './styles.css'; 
+import React, { useState, useRef } from 'react';
 
-function App() {
-  const [age, setAge] = useState(50); 
+const App = () => {
+  const [textState, setTextState] = useState('text');
+
+  const handleClickState = () => {
+    setTextState(textState + '!');
+  };
+  const ref = useRef('text');
+  const handleClickRef = () => {
+    ref.current += '!';
+    console.log(ref.current); 
+  };
 
   return (
-    <MyContext.Provider value={{ age, setAge }}>
-      <h1>Контекст в React</h1>
-      <Parent />
-      <button onClick={() => setAge((prevAge) => prevAge - 2)}>Уменьшить возраст на 2</button>
-    </MyContext.Provider>
+    <div>
+      <h2>Использование useState</h2>
+      <p>{textState}</p>
+      <button onClick={handleClickState}>Добавить восклицательный знак (useState)</button>
+
+      <h2>Использование useRef</h2>
+      <p>{ref.current}</p> 
+      <button onClick={handleClickRef}>Добавить восклицательный знак (useRef)</button>
+    </div>
   );
-}
+};
 
 export default App;
