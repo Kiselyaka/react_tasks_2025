@@ -1,3 +1,5 @@
+import { Outlet } from 'react-router-dom';
+
 function Student() {
   const student = {
     firstName: 'Maxim',
