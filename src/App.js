@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
-import Text from './Text'; 
+import React, { useState, useCallback } from 'react';
+import Products from './Products';
 
 const App = () => {
-  const [name, setName] = useState('');
+  const [products, setProducts] = useState([]);
+
+  const addProduct = useCallback(() => {
+    const newProduct = 'Product ' + (products.length + 1); 
+    setProducts((prevProducts) => [...prevProducts, newProduct]);
+  }, [products.length]);
+
 
   return (
     <div>
-      <label>
-        Name:
-        <input value={name} onChange={(e) => setName(e.target.value)} />
-      </label>
-      <br />
-      <Text />
+      <h1>Product List</h1>
+      <button onClick={addProduct}>Add Product</button>
+      <Products products={products} />
     </div>
   );
 };
