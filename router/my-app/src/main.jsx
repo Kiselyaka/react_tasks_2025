@@ -10,12 +10,14 @@ import Root from './routes/root';
 import ErrorPage404 from './error-page-404'; 
 import Product from './routes/product';
 import Student from './routes/student'; 
+import Root, { loader as rootLoader } from './routes/root';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
     errorElement: <ErrorPage404 />,
+    loader: rootLoader,
     children: [
       {
         path: 'products/:productId',

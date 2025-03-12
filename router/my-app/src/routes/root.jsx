@@ -1,4 +1,12 @@
 import { Outlet, Link } from "react-router-dom";
+import { getProducts } from '../forStorage'
+import { getStudents } from '../forStorage';
+
+export async function loader() {
+	const products = await getProducts();
+  const students = await getStudents(); 
+  return { products, students }; 
+}
 
 function Root() {
   return (
