@@ -1,16 +1,16 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from "react-router-dom";
 
 function Root() {
   return (
     <div id="main">
       <nav>
-        <a href="/products/1">Product 1</a>
-        <a href="/products/2">Product 2</a>
-        <a href="/students/1">Student 1</a> 
-        <a href="/students/2">Student 2</a> 
+        <Link to={`/products/1`}>Product1</Link>
+        <Link to={`/products/2`}>Product2</Link>
+        <Link to={`/students/1`}>Student 1</Link>
+        <Link to={`/students/2`}>Student 2</Link>
       </nav>
       <div id="product">
-        <Outlet /> 
+        <Outlet />
       </div>
     </div>
   );
