@@ -1,62 +1,65 @@
 import localforage from 'localforage';
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
 
+// Конфигурация localforage
+localforage.config({
+  name: 'myApp',
+  storeName: 'dataStore',
+});
+
+// Получение списка студентов
 export async function getStudents() {
   await someNetwork(); 
   let students = await localforage.getItem('students');
-  if (!students) students = []; 
-  return students;
+  return students || []; 
 }
 
+// Создание студента
 export async function createStudent() {
-    await someNetwork();
-    let id = nanoid(6);
-    let student = { id }; 
-    let students = await getStudents();
-    students.unshift(student); 
-    await setStudents(students); 
-    return student; 
+  await someNetwork();
+  const id = nanoid(6);
+  const student = { id, name: `Студент ${id}` };
+  const students = await getStudents();
+  students.unshift(student); 
+  await setStudents(students);
+  return student;
 }
 
+// Обновление списка студентов в localforage
 function setStudents(students) {
-    return localforage.setItem('students', students); 
+  return localforage.setItem('students', students);
 }
 
+// Получение списка продуктов
 export async function getProducts() {
   await someNetwork(); 
   let products = await localforage.getItem('products');
-  if (!products) products = []; 
-  return products;
+  return products || [];
 }
 
+// Создание продукта
 export async function createProduct() {
-	await someNetwork();
-	let id = nanoid(6);
-	let product = { id };
-	let products = await getProducts();
-	products.unshift(product);
-	await setProducts(products);
-	return product;
+  await someNetwork();
+  const id = nanoid(6);
+  const product = { id, name: `Продукт ${id}` };
+  const products = await getProducts();
+  products.unshift(product); 
+  await setProducts(products);
+  return product;
 }
 
+// Обновление списка продуктов в localforage
 function setProducts(products) {
-	return localforage.setItem('products', products);
+  return localforage.setItem('products', products);
 }
 
+// Симуляция сетевого запроса
 let someCache = {};
 
 async function someNetwork(key) {
-  if (!key) {
-    someCache = {};
-  }
-
-  if (someCache[key]) {
-    return;
-  }
-
+  if (!key) someCache = {};
+  if (someCache[key]) return;
+  
   someCache[key] = true;
-
-  return new Promise((res) => {
-    setTimeout(res, Math.random() * 700);
-  });
+  return new Promise((res) => setTimeout(res, Math.random() * 500));
 }
